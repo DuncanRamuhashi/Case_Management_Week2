@@ -1,0 +1,269 @@
+﻿@model CourtCase
+
+@section title {
+    <h1>Manage Case</h1>
+}
+@if (Model == null)
+{
+    <p>Case not found.</p>
+}
+else
+{
+    <div>
+        <div>
+            <div>
+                <h1>Case</h1>
+                <h2>#@Model.getCaseNumber().ToString()</h2>
+            </div>
+
+            <div>
+                <h2>@Model.getCaseName()</h2>
+            </div>
+        </div>
+
+        <div>
+            <h3>Case Progress</h3>
+
+
+
+            <input type="radio" name="status" value="Open"
+            checked="@(Model.getStatus() == "Open")" disabled />
+            <label>Open</label>
+            <br />
+
+            <input type="radio" name="status" value="Trial"
+            checked="@(Model.getStatus() == "Trial")" disabled />
+            <label>Trial</label>
+            <br />
+
+            <input type="radio" name="status" value="Closed"
+            checked="@(Model.getStatus() == "Closed")" disabled />
+            <label>Closed</label>
+            <br />
+        </div>
+
+        <div>
+            <button type="button" onclick="document.getElementById('chargeForm').showModal()">
+               Add a Charge
+            </button>
+
+            <button type="button" onclick="document.getElementById('defendantForm').showModal()">
+                Add Defendant
+            </button>
+
+            <button type="button" onclick="document.getElementById('courtForm').showModal()">
+                Assign Court
+            </button>
+
+            <button type="button" onclick="document.getElementById('judgeForm').showModal()">
+                   Assign Judge
+            </button>
+
+            <button type="button" onclick="document.getElementById('prosecutorForm').showModal()">
+                Assign Prosecutor
+            </button>
+        </div>
+ 
+
+        <dialog id="chargeForm">
+            <h3>Add a Charge</h3>
+
+            <form action="/Case/addCharge" method="post">
+                <label for="chargeName">Charge Name:</label>
+
+                <input type="text"
+                       id="chargeName"
+                       name="name"
+                       required />
+
+                <br /><br />
+
+                <button type="button"
+                        onclick="document.getElementById('chargeForm').close()">
+                    Cancel
+                </button>
+
+                <button type="submit">Save</button>
+            </form>
+        </dialog>
+
+        <dialog id="defendantForm">
+            <h3>Add Defendant</h3>
+            <form action="/Case/addDefendant" method="post">
+                <label>ID Number:</label>
+                <input type="text" name="idNumber" required>
+                <br><br>
+                <label>Name:</label>
+                <input type="text" name="name" required>
+                <br><br>
+                <button value="cancel">Cancel</button>
+                <button value="save">Save</button>
+            </form>
+        </dialog>
+
+       
+        <dialog id="courtForm">
+            <h3>Assign Court</h3>
+            <form action="/Case/assignCourt" method="post">
+                <label>Court Name:</label>
+                <input type="text" name="courtName" required>
+                <br><br>
+                <label>Location:</label>
+                <input type="text" name="location" required>
+                <br><br>
+                <button value="cancel">Cancel</button>
+                <button value="save">Save</button>
+            </form>
+        </dialog>
+
+       
+        <dialog id="judgeForm">
+            <h3>Assign Judge</h3>
+            <form action="/Case/assignJudge" method="post">
+                <label>Judge Name:</label>
+                <input type="text" name="judgeName" required>
+                <br><br>
+                <button value="cancel">Cancel</button>
+                <button value="save">Save</button>
+            </form>
+        </dialog>
+
+       
+        <dialog id="prosecutorForm">
+            <h3>Assign Prosecutor</h3>
+            <form action="/Case/assignProsecutor" method="post">
+                <label>Prosecutor Name:</label>
+                <input type="text" name="prosecutorName" required>
+                <br><br>
+                <button value="cancel">Cancel</button>
+                <button value="save">Save</button>
+            </form>
+        </dialog>
+
+      <div>
+            <div>
+                <div>
+                    <h3> file(emoji) Charges</h3>
+                     <div>
+                        @if (Model.getCharges() == null || Model.getCharges().Count == 0)
+                        {
+                            <p>No charges available.</p>
+                        }
+                        else
+                        {
+                            <ul>
+                                @foreach (var charge in Model.getCharges())
+                                {
+                                    <li> @charge.getId().ToString(). @charge.getName() </li>
+                                }
+                            </ul>
+                        }
+                        )
+                    </div>
+                </div>
+                <div>
+                    <h3> people emoji) Defendants</h3>
+                    <div>
+                    
+                        @if (Model.getDefendants() == null || Model.getDefendants().Count == 0)
+                        {
+                            <p> No defendants available.</p>
+
+                        }
+                        else
+                        {
+                            
+                          
+                                @foreach (var defendant in Model.getDefendants())
+                                {
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Number</th>
+                                            <th>Defendant Name</th>
+                                          
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr>
+                                            <td>@defendant.Key.ToString()</td>
+                                            <td>@defendant.Value.getName()</td>                  
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                }
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div> Person emoji )
+                    
+                    <h3> Case Assignment </h3> 
+                    
+                </div>
+                <div> 
+                    @if (Model.getCourt() == null)
+                    {
+                        <p>No court assigned.</p>
+                    }
+                    else
+                    {
+                        <p>Court: @Model.getCourt().getName(), @Model.getCourt().getLocation() </p>
+                    }
+                    
+                  
+                </div>
+                <div>  
+                        @if(Model.getJudge() == null)
+                        {
+                            <p>No judge assigned.</p>
+                        }
+                        else
+                        {
+                            <p>Judge: @Model.getJudge().getName() </p>
+                        }
+                 
+               
+                   </div>
+                <div>
+                    @if (Model.getProsecutor() == null)
+                    {
+                        <p>No prosecutor assigned.</p>
+
+                    }
+                 
+                  else{
+                        <p>prosecutor: @Model.getProsecutor().getName() </p>
+                  }
+                </div>
+                <div>
+                    <button type="button" onclick="document.getElementById('closeCaseForm').showModal()">
+                         Close Case
+                    </button>
+
+                    <dialog id="closeCaseForm">
+                        <h3>Close Case</h3>
+                        <p>Are you sure you want to close this case?</p>
+
+                     
+                        <form method="dialog">
+                            <button value="cancel">No, Go Back</button>
+                        </form>
+
+                        
+                        <form action="/Case/updateStatus" method="post">
+                            <input type="hidden" name="id" value="@Model.getId()" />
+                            <button type="submit" class="btn btn-primary">Yes, Close Case</button>
+                        </form>
+                    </dialog>
+                </div>
+            </div>
+
+     </div>
+    </div>
+}

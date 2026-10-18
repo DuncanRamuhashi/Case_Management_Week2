@@ -1,0 +1,45 @@
+﻿@model List<OriginalCase>
+
+@section title {
+    <h1>Case Management</h1>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Case Number</th>
+                <th>Case Name</th>
+                <th>Date Issued</th>
+                <th>Manage Case</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var originalCase in Model)
+            {
+                <tr>
+                    <td>@originalCase.getCaseNumber()</td>
+                    <td>@originalCase.getName()</td>
+                    <td>@originalCase.getDate().ToString()</td>
+                    <td>
+                        <a class="btn btn-primary"
+                           href="@($"/Case/Index/{originalCase.getId()}")">
+                            Create Court Case
+                        </a>
+
+                        <a class="btn btn-danger"
+                           href="@($"/Home/DismissCase/{originalCase.getId()}")">
+                            Dismiss Case
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No cases available.</p>
+}

@@ -140,7 +140,7 @@ namespace Case_Management_Week2.Controllers
         [HttpPost]
         public IActionResult updateStatus()
         {
-          CaseData.courtCase.updateStatus("Closed");
+            CaseData.courtCase.updateStatus("Closed");
             return RedirectToAction("Index");
         }
     }

@@ -10,39 +10,39 @@
 else
 {
     <div>
-        <div>
-            <div>
-                <h1>Case</h1>
+        <div class="container row">
+            <div class="col">
+               
                 <h2>#@Model.getCaseNumber().ToString()</h2>
             </div>
 
-            <div>
+            <div class="col">
                 <h2>@Model.getCaseName()</h2>
             </div>
         </div>
 
-        <div>
+        <div class="container "> 
             <h3>Case Progress</h3>
 
 
 
-            <input type="radio" name="status" value="Open"
+            <input type="radio" name="status" value="Open" class="form-check-input "
             checked="@(Model.getStatus() == "Open")" disabled />
             <label>Open</label>
             <br />
 
-            <input type="radio" name="status" value="Trial"
+            <input type="radio" name="status" value="Trial" class="form-check-input  "
             checked="@(Model.getStatus() == "Trial")" disabled />
             <label>Trial</label>
             <br />
 
-            <input type="radio" name="status" value="Closed"
+            <input type="radio" name="status" value="Closed" class="form-check-input "
             checked="@(Model.getStatus() == "Closed")" disabled />
             <label>Closed</label>
             <br />
         </div>
 
-        <div>
+        <div class="container">
             <button type="button" onclick="document.getElementById('chargeForm').showModal()">
                Add a Charge
             </button>
@@ -140,10 +140,10 @@ else
             </form>
         </dialog>
 
-      <div>
-            <div>
-                <div>
-                    <h3> file(emoji) Charges</h3>
+      <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3>Charges</h3>
                      <div>
                         @if (Model.getCharges() == null || Model.getCharges().Count == 0)
                         {
@@ -158,11 +158,11 @@ else
                                 }
                             </ul>
                         }
-                        )
+                        
                     </div>
                 </div>
-                <div>
-                    <h3> people emoji) Defendants</h3>
+                <div class="col">
+                    <h3>Defendants</h3>
                     <div>
                     
                         @if (Model.getDefendants() == null || Model.getDefendants().Count == 0)
@@ -200,13 +200,11 @@ else
                     </div>
                 </div>
             </div>
-            <div>
-                <div> Person emoji )
+            <div class="container">
+                <div class="row">
                     
                     <h3> Case Assignment </h3> 
-                    
-                </div>
-                <div> 
+                      <div class="col"> 
                     @if (Model.getCourt() == null)
                     {
                         <p>No court assigned.</p>
@@ -218,7 +216,7 @@ else
                     
                   
                 </div>
-                <div>  
+                <div class="col">  
                         @if(Model.getJudge() == null)
                         {
                             <p>No judge assigned.</p>
@@ -230,7 +228,7 @@ else
                  
                
                    </div>
-                <div>
+                <div class="col"    >
                     @if (Model.getProsecutor() == null)
                     {
                         <p>No prosecutor assigned.</p>
@@ -241,7 +239,7 @@ else
                         <p>prosecutor: @Model.getProsecutor().getName() </p>
                   }
                 </div>
-                <div>
+                <div class="col">
                     <button type="button" onclick="document.getElementById('closeCaseForm').showModal()">
                          Close Case
                     </button>
@@ -263,6 +261,8 @@ else
                     </dialog>
                 </div>
             </div>
+                </div>
+              
 
      </div>
     </div>

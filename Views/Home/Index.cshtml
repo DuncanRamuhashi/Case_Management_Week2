@@ -22,11 +22,11 @@
                 <tr>
                     <td>@originalCase.getCaseNumber()</td>
                     <td>@originalCase.getName()</td>
-                    <td>@originalCase.getDate().ToString()</td>
+                    <td>@originalCase.getDate().ToShortDateString()</td>
                     <td>
                         <a class="btn btn-primary"
                            href="@($"/Case/Index/{originalCase.getId()}")">
-                            Create Court Case
+                            Manage
                         </a>
 
                         <a class="btn btn-danger"

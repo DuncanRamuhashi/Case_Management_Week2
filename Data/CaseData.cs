@@ -12,8 +12,7 @@ new OriginalCase(3, "1003", "Nomsa Dlamini vs Peter Khumalo", DateTime.Now.Date)
 new OriginalCase(4, "1004", "Lerato Molefe vs Kabelo Maseko", DateTime.Now.Date),
 new OriginalCase(5, "1005", "Pieter van der Merwe vs Johan Botha", DateTime.Now.Date),
 new OriginalCase(6, "1006", "Ayanda Ndlovu vs Sibusiso Zulu", DateTime.Now.Date),
-new OriginalCase(7, "1007", "Naledi Ramaphosa vs Tumelo Sekhukhune", DateTime.Now.Date),
-new OriginalCase(8, "1008", "Zanele Khumalo vs Bongani Sithole", DateTime.Now.Date),
+
 
         };
         public static CourtCase courtCase;

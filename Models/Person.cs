@@ -1,6 +1,6 @@
 ﻿namespace Case_Management_Week2.Models
 {
-    public abstract class Person : Getter
+    public abstract class Person : IGetter
     {
         private string _id;
         private string _name;
